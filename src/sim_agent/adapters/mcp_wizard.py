@@ -88,6 +88,11 @@ class SoftwareProfile:
     mcp_tools: list[dict] = field(default_factory=list)
     # [{"name": "ansys_start", "description": "...", "params": [...]}]
 
+    # ---- KnowledgeBridge / 知识桥配置 ----
+    kb_guides_dir: str = ""                 # Path to Markdown guides / Markdown 指南路径
+    kb_pdf_dir: str = ""                    # Path to PDF manuals / PDF 手册路径
+    kb_relevance_map: dict[str, list[str]] = field(default_factory=dict)  # domain→[module_names] / 领域→[模块名]
+
     # ---- Config / 配置 ----
     config_complete: bool = False           # All steps completed?
     config_steps_done: list[str] = field(default_factory=list)
@@ -105,25 +110,26 @@ SETUP_STEPS = [
     {
         "step": 7,
         "id": "knowledge",
-        "title": "Step 7: Knowledge Base Setup / KnowledgeBridge 知识库配置",
+        "title": "Step 7: KnowledgeBridge Setup / KnowledgeBridge 知识桥配置 ★",
+        "description": "Configure where your software documentation lives so the agent can auto-consult manuals. / 配置软件文档位置，Agent 将自动查阅手册。",
         "questions": [
             {
                 "id": "guides_dir",
-                "ask": "Where are Markdown guides? / Markdown 指南文档在哪？\n  (path or 'skip')",
-                "example": "D:/ansys/docs/guides/",
-                "target_field": "_kb_guides_dir",
+                "ask": "Q7.1: Path to Markdown guides? / Markdown 指南文档的路径？\n  (Absolute path like D:/.../guides/  |  'skip' if none  |  如无可填 'skip')",
+                "example": "D:/ansys/docs/guides/  or  skip",
+                "target_field": "kb_guides_dir",
             },
             {
                 "id": "pdf_dir",
-                "ask": "Where are PDF manuals? / PDF 手册在哪？\n  (path or 'skip')",
-                "example": "D:/ansys/pdf/",
-                "target_field": "_kb_pdf_dir",
+                "ask": "Q7.2: Path to PDF reference manuals? / PDF 参考手册的路径？\n  (These will be vector-indexed for semantic search  |  将建立向量索引用于语义搜索)\n  (Absolute path like D:/.../pdf/  |  'skip' if none)",
+                "example": "D:/ansys/pdf/  or  skip",
+                "target_field": "kb_pdf_dir",
             },
             {
                 "id": "pdf_relevance",
-                "ask": "Which PDF modules per domain? / 每个领域对应哪些 PDF？\n  domain: [module1, module2]",
-                "example": "structural: [Structural_Analysis, Material_Models]",
-                "target_field": "_kb_relevance",
+                "ask": "Q7.3: Map each domain to relevant PDF modules? / 每个物理领域对应哪些 PDF 模块？\n  Format: domain_name: [module_folder1, module_folder2, ...]\n  (Separate entries with newline  |  每个领域一行)",
+                "example": "structural: [Structural_Analysis, Material_Models]\nthermal: [Thermal_Analysis, CFD]\nelectromagnetic: [EM_Analysis, RF_Module]",
+                "target_field": "kb_relevance_map",
             },
         ],
     },
@@ -380,7 +386,23 @@ class McpWizard:
                     "type": "readme",
                     "description": f"README for {p.name} Agent",
                 },
+                {
+                    "path": "src/knowledge/knowledge_bridge.py",
+                    "type": "knowledge_bridge",
+                    "description": f"KnowledgeBridge for {p.name} — connects agent to software manuals / 连接 Agent 与软件手册",
+                    "template": "base_knowledge_bridge",
+                    "variables": {
+                        "GUIDES_DIR": p.kb_guides_dir or "SKIP",
+                        "PDF_DIR": p.kb_pdf_dir or "SKIP",
+                        "PDF_RELEVANCE_MAP": str(p.kb_relevance_map) if p.kb_relevance_map else "{}",
+                    },
+                },
             ],
+            "knowledge_bridge_config": {
+                "guides_dir": p.kb_guides_dir or "",
+                "pdf_dir": p.kb_pdf_dir or "",
+                "pdf_relevance_map": p.kb_relevance_map or {},
+            },
             "codex_mcp_config": {
                 "mcpServers": {
                     f"{snake_name}": {

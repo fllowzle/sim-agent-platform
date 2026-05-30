@@ -353,31 +353,37 @@ class KnowledgeBridge:
 
     @classmethod
     def wizard_questions(cls) -> list[dict]:
-        u"""Generate Step 7 wizard questions for knowledge base setup.
-        生成 Step 7 向导问题，用于知识库配置。"""
+        u"""Generate Step 7 wizard questions for KnowledgeBridge setup.
+        生成 Step 7 向导问题 — KnowledgeBridge 知识桥路径配置。
+
+        These questions ask the user to specify where their software's
+        documentation lives, so the generated agent can auto-consult manuals.
+        这些问题询问用户软件文档的存储位置，生成的 Agent 将自动查阅手册。
+        """
         return [
             {
                 "step": 7,
                 "id": "knowledge",
-                "title": "Step 7: Knowledge Base Setup / 知识库配置",
+                "title": "Step 7: KnowledgeBridge Setup / KnowledgeBridge 知识桥配置 \u2605",
+                "description": "Where does your software keep its documentation? The agent will build a bridge to auto-query these sources. / 你的软件文档在哪里？Agent 将建桥自动查询这些来源。",
                 "questions": [
                     {
                         "id": "guides_dir",
-                        "ask": "Where are the software's Markdown documentation/guides? / 软件的 Markdown 文档/指南在哪里？\n  (Enter path, or 'skip' if none)",
-                        "example": "D:/ansys/docs/guides/ (or 'skip')",
-                        "target_field": "guides_dir",
+                        "ask": "Q7.1: Path to Markdown guides (.md) for this software? / 软件的 Markdown 指南文档 (.md) 路径？\n  (Absolute path like D:/.../guides/  |  'skip' if none  |  如无可填 'skip')",
+                        "example": "D:/ansys/docs/guides/  or  skip",
+                        "target_field": "kb_guides_dir",
                     },
                     {
                         "id": "pdf_dir",
-                        "ask": "Where are the PDF reference manuals? / PDF 参考手册在哪里？\n  (Enter path, or 'skip' if none)",
-                        "example": "D:/ansys/pdf/ (or 'skip')",
-                        "target_field": "pdf_dir",
+                        "ask": "Q7.2: Path to PDF reference manuals? / PDF 参考手册路径？\n  (Will be vector-indexed for semantic search via ChromaDB / 将通过 ChromaDB 建立向量索引用于语义搜索)\n  (Absolute path like D:/.../pdf/  |  'skip' if none)",
+                        "example": "D:/ansys/pdf/  or  skip",
+                        "target_field": "kb_pdf_dir",
                     },
                     {
-                        "id": "relevance_map",
-                        "ask": "For each physics domain, which PDF modules are relevant? / 每个物理领域对应哪些 PDF 模块？\n  domain_name: [module1, module2, ...]",
-                        "example": "structural: [Structural_Analysis, Material_Models]\n  thermal: [Thermal_Analysis, CFD]",
-                        "target_field": "pdf_relevance_map",
+                        "id": "pdf_relevance",
+                        "ask": "Q7.3: Map each physics domain to relevant PDF module folders? / 每个物理领域对应哪些 PDF 模块文件夹？\n  Format: domain_name: [module_folder1, module_folder2, ...]\n  (One line per domain  |  每个领域一行  |  'skip' if none)",
+                        "example": "structural: [Structural_Analysis, Material_Models]\nthermal: [Thermal_Analysis, CFD]\nelectromagnetic: [EM_Analysis, RF_Module]",
+                        "target_field": "kb_relevance_map",
                     },
                 ],
             },
