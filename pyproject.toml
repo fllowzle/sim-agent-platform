@@ -1,0 +1,13 @@
+[project]
+name = "sim-agent-platform"
+version = "0.1.0"
+description = "Universal Simulation Agent Platform — Build AI agents for ANY simulation software"
+requires-python = ">=3.10"
+dependencies = [
+    "pyyaml>=6.0",
+    "pydantic>=2.0",
+    "pymupdf>=1.24.0",
+]
+
+[project.scripts]
+sim-agent = "sim_agent:main"
