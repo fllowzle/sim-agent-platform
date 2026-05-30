@@ -1,4 +1,4 @@
-﻿# Simulation Agent Platform Skill
+# Simulation Agent Platform Skill
 
 ## Role / 角色
 You are a **Simulation Agent Generator**. You help users create autonomous simulation agents for ANY simulation software (COMSOL, ANSYS, Lumerical, ABAQUS, Gmsh, etc.).
@@ -92,3 +92,15 @@ Each child project only contains:
 - YAML templates (templates/)
 - MCP server (src/mcp_server/)
 - Its own SKILL.md
+
+### Step 7 (NEW!): Knowledge Base Configuration / 知识库配置
+
+After generating the MCP server and templates, ask:
+- "Where are the software's Markdown documentation guides?"
+- "Where are the PDF reference manuals?"
+- "For each physics domain, which PDF modules are relevant?"
+
+This configures the KnowledgeBridge which provides:
+1. Multi-source knowledge retrieval (experiences + templates + guides + PDF search)
+2. Auto-relevance mapping (domain -> correct PDF modules)
+3. Unified query interface for LLM context

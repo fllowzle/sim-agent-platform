@@ -1,4 +1,4 @@
-﻿# -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 """
 =============================================================================
 MCP Wizard — 引导式仿真 Agent 配置生成器
@@ -101,6 +101,32 @@ class SoftwareProfile:
 # 每个步骤是一个结构化提示，Codex 用来向用户提问。
 
 SETUP_STEPS = [
+
+    {
+        "step": 7,
+        "id": "knowledge",
+        "title": "Step 7: Knowledge Base Setup / KnowledgeBridge 知识库配置",
+        "questions": [
+            {
+                "id": "guides_dir",
+                "ask": "Where are Markdown guides? / Markdown 指南文档在哪？\n  (path or 'skip')",
+                "example": "D:/ansys/docs/guides/",
+                "target_field": "_kb_guides_dir",
+            },
+            {
+                "id": "pdf_dir",
+                "ask": "Where are PDF manuals? / PDF 手册在哪？\n  (path or 'skip')",
+                "example": "D:/ansys/pdf/",
+                "target_field": "_kb_pdf_dir",
+            },
+            {
+                "id": "pdf_relevance",
+                "ask": "Which PDF modules per domain? / 每个领域对应哪些 PDF？\n  domain: [module1, module2]",
+                "example": "structural: [Structural_Analysis, Material_Models]",
+                "target_field": "_kb_relevance",
+            },
+        ],
+    },
     {
         "step": 1,
         "id": "identity",
