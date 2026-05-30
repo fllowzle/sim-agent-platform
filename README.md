@@ -1,35 +1,31 @@
-﻿# sim-agent-platform — Universal Simulation Agent Platform
-# sim-agent-platform — 通用仿真 Agent 平台
+# sim-agent-platform 鈥?Universal Simulation Agent Platform
+# sim-agent-platform 鈥?閫氱敤浠跨湡 Agent 骞冲彴
 
 [![Python](https://img.shields.io/badge/Python-3.10+-blue.svg)](https://www.python.org/)
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 [![MCP](https://img.shields.io/badge/MCP-Compatible-purple.svg)](https://modelcontextprotocol.io/)
 [![Codex](https://img.shields.io/badge/Codex-Ready-orange.svg)](https://github.com/openai/codex)
 
-> **One platform. Any simulation software.** / **一个平台。任意仿真软件。**
+> **One platform. Any simulation software.** / **涓€涓钩鍙般€備换鎰忎豢鐪熻蒋浠躲€?*
 >
-> Describe your software — the wizard generates a complete AI Agent for it.
-> 描述你的软件 — 向导生成一个完整的 AI Agent。
-
+> Describe your software 鈥?the wizard generates a complete AI Agent for it.
+> 鎻忚堪浣犵殑杞欢 鈥?鍚戝鐢熸垚涓€涓畬鏁寸殑 AI Agent銆?
 ---
 
-## The Problem / 问题
+## The Problem / 闂
 
 Every simulation software needs its own AI agent. Without this platform:
-每个仿真软件都需要自己的 AI Agent。没有这个平台：
+姣忎釜浠跨湡杞欢閮介渶瑕佽嚜宸辩殑 AI Agent銆傛病鏈夎繖涓钩鍙帮細
 
-- Build MCP server from scratch? → 1000+ lines of boilerplate / 1000+ 行样板代码
-- Paper-to-simulation? → Write custom parser for each software / 为每个软件写解析器
-- Error auto-diagnosis? → Manually catalog error patterns / 手动整理错误模式
-- Experience learning? → Build from zero every time / 每次都从零搭建
+- Build MCP server from scratch? 鈫?1000+ lines of boilerplate / 1000+ 琛屾牱鏉夸唬鐮?- Paper-to-simulation? 鈫?Write custom parser for each software / 涓烘瘡涓蒋浠跺啓瑙ｆ瀽鍣?- Error auto-diagnosis? 鈫?Manually catalog error patterns / 鎵嬪姩鏁寸悊閿欒妯″紡
+- Experience learning? 鈫?Build from zero every time / 姣忔閮戒粠闆舵惌寤?
+## The Solution / 瑙ｅ喅鏂规
 
-## The Solution / 解决方案
-
-**6-step guided wizard → Complete Agent** / **6 步引导式向导 → 完整 Agent**
+**6-step guided wizard 鈫?Complete Agent** / **6 姝ュ紩瀵煎紡鍚戝 鈫?瀹屾暣 Agent**
 
 ```mermaid
 flowchart LR
-    A[You / 你] -->|"Step 1-6: Answer questions"| B[McpWizard]
+    A[You / 浣燷 -->|"Step 1-6: Answer questions"| B[McpWizard]
     B -->|Generate| C[Agent Project]
     C -->|Contains| D[MCP Server]
     C -->|Contains| E[YAML Templates]
@@ -40,16 +36,15 @@ flowchart LR
 
 ---
 
-## Quick Example / 快速示例
-
-### Creating an ANSYS Agent (with Codex) / 创建 ANSYS Agent（在 Codex 中）
+## Quick Example / 蹇€熺ず渚?
+### Creating an ANSYS Agent (with Codex) / 鍒涘缓 ANSYS Agent锛堝湪 Codex 涓級
 
 ```
-User / 用户:
-  "用 sim-agent-platform 为 ANSYS 创建一个 Agent"
+User / 鐢ㄦ埛:
+  "鐢?sim-agent-platform 涓?ANSYS 鍒涘缓涓€涓?Agent"
 
-Codex (guided by SKILL.md) / Codex（由 SKILL.md 引导）:
-  --- Step 1/6: Software Identity / 软件身份 ---
+Codex (guided by SKILL.md) / Codex锛堢敱 SKILL.md 寮曞锛?
+  --- Step 1/6: Software Identity / 杞欢韬唤 ---
   Q: What is the simulation software called?
   A: ANSYS Mechanical
 
@@ -59,35 +54,35 @@ Codex (guided by SKILL.md) / Codex（由 SKILL.md 引导）:
   Q: Connection mode?
   A: 1 (Python SDK)
 
-  --- Step 2/6: Physics Domains / 物理领域 ---
+  --- Step 2/6: Physics Domains / 鐗╃悊棰嗗煙 ---
   Q: How many physics domains?
-  A: 3 — structural, thermal, electromagnetic
+  A: 3 鈥?structural, thermal, electromagnetic
 
   [For each domain, asks about interfaces and study types]
 
-  --- Step 3/6: Error Patterns / 错误模式 ---
+  --- Step 3/6: Error Patterns / 閿欒妯″紡 ---
   Q: Common solver errors?
-  A: 1. rigid body motion → insufficient constraints
-     2. negative Jacobian → bad mesh
-     3. non-convergence → refine mesh
+  A: 1. rigid body motion 鈫?insufficient constraints
+     2. negative Jacobian 鈫?bad mesh
+     3. non-convergence 鈫?refine mesh
      ...
 
-  --- Step 4/6: Template Seeds / 模板播种 ---
+  --- Step 4/6: Template Seeds / 妯℃澘鎾 ---
   Q: Typical simulation workflows?
-  A: 1. Cantilever beam → structural
-     2. Heat sink → thermal
-     3. Modal analysis → structural
+  A: 1. Cantilever beam 鈫?structural
+     2. Heat sink 鈫?thermal
+     3. Modal analysis 鈫?structural
 
-  --- Step 5/6: Paper Keywords / 论文关键词 ---
+  --- Step 5/6: Paper Keywords / 璁烘枃鍏抽敭璇?---
   Q: Keywords for each domain?
   A: structural: [stress, von Mises, FEA, displacement...]
      thermal: [heat flux, temperature, Nusselt...]
 
-  --- Step 6/6: MCP Tools / MCP 工具 ---
+  --- Step 6/6: MCP Tools / MCP 宸ュ叿 ---
   Q: Core operations?
   A: create_geometry, assign_material, apply_load, mesh, solve, get_result
 
-  ✅ All 6 steps complete. Generating files...
+  鉁?All 6 steps complete. Generating files...
   Created: ansys-agent/src/mcp_server/server.py
   Created: ansys-agent/templates/structural/cantilever_beam.yaml
   Created: ansys-agent/templates/thermal/heat_sink.yaml
@@ -99,69 +94,64 @@ Codex (guided by SKILL.md) / Codex（由 SKILL.md 引导）:
 
 ---
 
-## Architecture / 架构
+## Architecture / 鏋舵瀯
 
 ```
-sim-agent-platform/                         # THIS PROJECT — Universal skeleton
-                                            # 本项目 — 通用骨架
-├── src/sim_agent/
-│   ├── core/
-│   │   ├── template_store.py               # Universal YAML template system
-│   │   │                                   # 通用 YAML 模板系统
-│   │   └── experience_store.py             # Universal correction memory
-│   │                                       # 通用纠错记忆
-│   ├── adapters/
-│   │   ├── mcp_wizard.py                   # ★ Guided setup wizard / 引导式配置向导
-│   │   ├── base_parser.py                  # Pluggable paper parser / 可插拔论文解析器
-│   │   └── base_diagnostics.py             # Pluggable diagnostics / 可插拔诊断器
-│   └── skills/
-│       └── SKILL.md                        # Codex skill for the wizard
-│
-├── docs/
-│   └── mcp_server_template.py              # Minimal MCP server template
-│                                           # MCP Server 最小模板
-└── examples/                               # Example agents / 示例 Agent
-    └── comsol/                             # COMSOL Agent (built with this platform)
+sim-agent-platform/                         # THIS PROJECT 鈥?Universal skeleton
+                                            # 鏈」鐩?鈥?閫氱敤楠ㄦ灦
+鈹溾攢鈹€ src/sim_agent/
+鈹?  鈹溾攢鈹€ core/
+鈹?  鈹?  鈹溾攢鈹€ template_store.py               # Universal YAML template system
+鈹?  鈹?  鈹?                                  # 閫氱敤 YAML 妯℃澘绯荤粺
+鈹?  鈹?  鈹斺攢鈹€ experience_store.py             # Universal correction memory
+鈹?  鈹?                                      # 閫氱敤绾犻敊璁板繂
+鈹?  鈹溾攢鈹€ adapters/
+鈹?  鈹?  鈹溾攢鈹€ mcp_wizard.py                   # 鈽?Guided setup wizard / 寮曞寮忛厤缃悜瀵?鈹?  鈹?  鈹溾攢鈹€ base_parser.py                  # Pluggable paper parser / 鍙彃鎷旇鏂囪В鏋愬櫒
+鈹?  鈹?  鈹斺攢鈹€ base_diagnostics.py             # Pluggable diagnostics / 鍙彃鎷旇瘖鏂櫒
+鈹?  鈹斺攢鈹€ skills/
+鈹?      鈹斺攢鈹€ SKILL.md                        # Codex skill for the wizard
+鈹?鈹溾攢鈹€ docs/
+鈹?  鈹斺攢鈹€ mcp_server_template.py              # Minimal MCP server template
+鈹?                                          # MCP Server 鏈€灏忔ā鏉?鈹斺攢鈹€ examples/                               # Example agents / 绀轰緥 Agent
+    鈹斺攢鈹€ comsol/                             # COMSOL Agent (built with this platform)
 
-comsol-agent/                               # COMSOL-specific / COMSOL 专属
-ansys-agent/                                # ANSYS-specific / ANSYS 专属
-lumerical-agent/                            # Lumerical-specific / Lumerical 专属
-your-agent/                                 # YOUR software / 你的软件
-    ↓                                       # Each generated by the wizard
-    ↓                                       # 每个都由向导生成
+comsol-agent/                               # COMSOL-specific / COMSOL 涓撳睘
+ansys-agent/                                # ANSYS-specific / ANSYS 涓撳睘
+lumerical-agent/                            # Lumerical-specific / Lumerical 涓撳睘
+your-agent/                                 # YOUR software / 浣犵殑杞欢
+    鈫?                                      # Each generated by the wizard
+    鈫?                                      # 姣忎釜閮界敱鍚戝鐢熸垚
 ```
 
-## What Gets Generated / 生成了什么
+## What Gets Generated / 鐢熸垚浜嗕粈涔?
+For each software, the wizard generates / 涓烘瘡涓蒋浠剁敓鎴愶細
 
-For each software, the wizard generates / 为每个软件生成：
-
-| File / 文件 | Purpose / 用途 | Lines / 行数 |
+| File / 鏂囦欢 | Purpose / 鐢ㄩ€?| Lines / 琛屾暟 |
 |------------|---------------|------------|
-| `src/mcp_server/server.py` | MCP Server (from template) / MCP 服务器 | ~100 |
-| `src/agent_config.py` | Software-specific config / 软件专属配置 | ~80 |
-| `templates/{domain}/*.yaml` | 3-5 seed templates / 3-5 个种子模板 | ~50 each |
+| `src/mcp_server/server.py` | MCP Server (from template) / MCP 鏈嶅姟鍣?| ~100 |
+| `src/agent_config.py` | Software-specific config / 杞欢涓撳睘閰嶇疆 | ~80 |
+| `templates/{domain}/*.yaml` | 3-5 seed templates / 3-5 涓瀛愭ā鏉?| ~50 each |
 | `skills/SKILL.md` | Codex skill for the generated agent | ~60 |
 | `README.md` | Project README | ~80 |
 | `pyproject.toml` | Python config | ~15 |
 
 **Total: ~500 lines vs ~2000+ lines if built from scratch.**
-**总计：约 500 行 vs 从零搭建需 2000+ 行。**
+**鎬昏锛氱害 500 琛?vs 浠庨浂鎼缓闇€ 2000+ 琛屻€?*
 
 ---
 
-## Module Reusability / 模块复用率
-
-| Module / 模块 | Reusability / 复用率 | Customization / 定制方式 |
+## Module Reusability / 妯″潡澶嶇敤鐜?
+| Module / 妯″潡 | Reusability / 澶嶇敤鐜?| Customization / 瀹氬埗鏂瑰紡 |
 |--------------|---------------------|------------------------|
-| `template_store.py` | 100% | Just swap YAML files / 只换 YAML 文件 |
-| `experience_store.py` | 100% | Nothing to change / 无需改动 |
-| `base_parser.py` | 80% | Override keyword dicts / 覆盖关键词词典 |
-| `base_diagnostics.py` | 30% | Override error patterns / 覆盖错误模式 |
-| `mcp_wizard.py` | 100% | No change — drives all software / 不变 — 驱动所有软件 |
+| `template_store.py` | 100% | Just swap YAML files / 鍙崲 YAML 鏂囦欢 |
+| `experience_store.py` | 100% | Nothing to change / 鏃犻渶鏀瑰姩 |
+| `base_parser.py` | 80% | Override keyword dicts / 瑕嗙洊鍏抽敭璇嶈瘝鍏?|
+| `base_diagnostics.py` | 30% | Override error patterns / 瑕嗙洊閿欒妯″紡 |
+| `mcp_wizard.py` | 100% | No change 鈥?drives all software / 涓嶅彉 鈥?椹卞姩鎵€鏈夎蒋浠?|
 
 ---
 
-## Installation / 安装
+## Installation / 瀹夎
 
 ```bash
 # Clone and install the platform
@@ -170,12 +160,12 @@ cd sim-agent-platform
 pip install -e .
 
 # Use with Codex: load skills/SKILL.md as a Codex Skill
-# 在 Codex 中使用：将 skills/SKILL.md 加载为 Codex Skill
+# 鍦?Codex 涓娇鐢細灏?skills/SKILL.md 鍔犺浇涓?Codex Skill
 ```
 
-## Usage / 使用方式
+## Usage / 浣跨敤鏂瑰紡
 
-### Method 1: With Codex (Recommended) / 方式 1：Codex（推荐）
+### Method 1: With Codex (Recommended) / 鏂瑰紡 1锛欳odex锛堟帹鑽愶級
 
 1. Load `src/sim_agent/skills/SKILL.md` as a Codex Skill
 2. Say: "Create an agent for [your software]"
@@ -184,7 +174,7 @@ pip install -e .
 5. Register the new MCP server in Codex config
 6. Start simulating!
 
-### Method 2: Python API / 方式 2：Python API
+### Method 2: Python API / 鏂瑰紡 2锛歅ython API
 
 ```python
 from sim_agent.adapters.mcp_wizard import McpWizard, create_profile_quick
@@ -218,26 +208,53 @@ print(f"Files to create: {len(plan['files_to_create'])}")
 
 ---
 
-## Relationship to COMSOL Agent / 与 COMSOL Agent 的关系
 
+### 5. KnowledgeBridge 鈥?Multi-Source Knowledge Integration / 澶氭簮鐭ヨ瘑闆嗘垚 馃啎
+
+Every generated agent gets a universal KnowledgeBridge that unifies:
+姣忎釜鐢熸垚鐨?Agent 閮藉甫涓€涓€氱敤 KnowledgeBridge锛岀粺涓€绠＄悊锛?
+| Priority / 浼樺厛绾?| Source / 鏉ユ簮 | Reusability / 澶嶇敤鐜?|
+|:--:|------|:--:|
+| 1 | ExperienceStore (correction memory / 绾犻敊璁板繂) | 100% |
+| 2 | TemplateStore (template pitfalls / 妯℃澘甯歌鍧? | 100% |
+| 3 | Embedded Markdown Guides (manuals / 鎵嬪唽) | Pluggable path / 鍙厤缃矾寰?|
+| 4 | Physics Topic Guides (structured config / 缁撴瀯鍖栭厤缃? | Pluggable / 鍙彃鎷?|
+| 5 | PDF Vector Search (semantic search / 璇箟鎼滅储) | Pluggable / 鍙厤缃?|
+
+```python
+from sim_agent.adapters.knowledge_bridge import KnowledgeBridge
+
+# Configure for your software / 涓轰綘鐨勮蒋浠堕厤缃?class MyBridge(KnowledgeBridge):
+    GUIDES_DIR = Path("./docs/guides")
+    PDF_MODULES_DIR = Path("./docs/pdf")
+    PDF_RELEVANCE_MAP = {
+        "structural": ["Structural_Analysis", "Material_Models"],
+        "thermal": ["Thermal_Analysis", "CFD"],
+    }
+
+kb = MyBridge()
+result = kb.query("How to set up fixed support?", domain="structural")
+# Returns results from all sources in priority order
+# 鎸変紭鍏堢骇杩斿洖鎵€鏈夋潵婧愮殑缁撴灉
 ```
-sim-agent-platform  ← 通用骨架（本项目）
-       |
-       +--- examples/comsol/  ← COMSOL Agent（comsol-agent代码库独立维护）
-       |                        包含 COMSOL 专属的 SKILL.md、Wu-Hu 模板等
-       |
-       +--- [your software]  ← 你的 Agent（向导生成）
+
+**Wizard Step 7** automatically configures this during agent creation.
+**Wizard 绗?7 姝?*鍦ㄥ垱寤?Agent 鏃惰嚜鍔ㄩ厤缃椤广€?## Relationship to COMSOL Agent / 涓?COMSOL Agent 鐨勫叧绯?
+```
+sim-agent-platform  鈫?閫氱敤楠ㄦ灦锛堟湰椤圭洰锛?       |
+       +--- examples/comsol/  鈫?COMSOL Agent锛坈omsol-agent浠ｇ爜搴撶嫭绔嬬淮鎶わ級
+       |                        鍖呭惈 COMSOL 涓撳睘鐨?SKILL.md銆乄u-Hu 妯℃澘绛?       |
+       +--- [your software]  鈫?浣犵殑 Agent锛堝悜瀵肩敓鎴愶級
 ```
 
 The [COMSOL Agent](https://github.com/fllowzle/comsol-agent) is the first complete example built with this platform.
 
 ---
 
-## License / 许可证
-
+## License / 璁稿彲璇?
 MIT
 
 ---
 
 > **"Give me 6 answers about your software, and I'll give you a complete AI Agent."**
-> **"告诉我关于你软件的 6 个答案，我给你一个完整的 AI Agent。"**
+> **"鍛婅瘔鎴戝叧浜庝綘杞欢鐨?6 涓瓟妗堬紝鎴戠粰浣犱竴涓畬鏁寸殑 AI Agent銆?**
