@@ -134,8 +134,11 @@ Codex（由 SKILL.md 引导）:
 
 ## Architecture / 架构
 
+> **sim-agent-platform** = Template / Framework.  
+> **comsol-agent, matlab-agent, ...** = Examples built from the template.
+
 ```
-sim-agent-platform/                         # 本项目 — Universal skeleton / 通用骨架
+sim-agent-platform/                         # Template 模板 — Universal skeleton / 通用骨架
 │
 ├── src/sim_agent/
 │   ├── core/                               # ★ 100% 软件无关 / Software-Agnostic
@@ -411,19 +414,31 @@ plan = wizard.generate_file_plan()
 
 ---
 
-## 与 COMSOL Agent 的关系
+## Examples / 示例
+
+Built from this template — each is an independent repo:
+
+| Example | Repo | Domains | Templates | Description |
+|:--|:--|:--|:--|:--|
+| **COMSOL Agent** | [fllowzle/comsol-agent](https://github.com/fllowzle/comsol-agent) | RF, Optics, Thermal, Structural | Wu-Hu cavity, Photonic crystal, ... | Full COMSOL simulation agent with mph SDK integration |
+| **MATLAB Agent** | [fllowzle/matlab-agent](https://github.com/fllowzle/matlab-agent) | Signal, Image, Control, Wireless, RF, Structural, ML, Optimization | FFT, PID, OFDM, CNN, SerDes, ... | MATLAB numerical computing agent with 8 domains and 14 MCP tools |
 
 ```
-sim-agent-platform   → 通用骨架（本项目）
+sim-agent-platform/          ← Template 模板 (this repo)
     │
-    ├── examples/comsol-agent/   → COMSOL Agent（独立维护）
-    │    包含 COMSOL 专属的 SKILL.md、Wu-Hu 模板、COMSOL 论文解析器
+    ├── comsol-agent/         ← Example 1: COMSOL Multiphysics
+    │     SKILL.md, COMSOL templates, mph parser, diagnostics
     │
-    └── [你的软件]   → 你的 Agent（向导生成）
-        包含你的软件的 YAML 模板、论文关键词、错误模式
+    ├── matlab-agent/         ← Example 2: MATLAB numerical computing
+    │     SKILL.md, MATLAB templates, 8-domain parser, 10 error patterns
+    │
+    └── [your-software]/     ← Your agent (7-step wizard generated)
+          YAML templates, paper keywords, error patterns
 ```
 
-[COMSOL Agent](https://github.com/fllowzle/comsol-agent) 是用本平台构建的第一个完整示例。
+> **"Tell me 7 things about your software, and I'll build you an agent like COMSOL Agent or MATLAB Agent."**
+
+---
 
 ---
 
